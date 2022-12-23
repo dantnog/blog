@@ -4,19 +4,19 @@
   </h2>
 
   <nav class={{s.nav}}>
-    <a routerLink="/new" *ngIf="appService.isAdmin" class={{s.linkButton}}>
+    <a routerLink="/new" *ngIf="appService.isAdmin" class={{s.linkbutton}}>
       New Post
     </a>
-    <a routerLink="/" class={{s.linkButton}}>
+    <a routerLink="/" class={{s.linkbutton}}>
       Home
     </a>
-    <a routerLink="/login" *ngIf="!appService.isAuth" class={{s.linkButton}}>
+    <a routerLink="/login" *ngIf="!appService.isAuth" class={{s.linkbutton}}>
       Login
     </a>
-    <a routerLink="/register" *ngIf="!appService.isAuth" class={{s.linkButton}}>
+    <a routerLink="/register" *ngIf="!appService.isAuth" class={{s.linkbutton}}>
       Register
     </a>
-    <button class={{s.linkButton}} (click)="onChangeTheme()">
+    <button class={{s.linkbutton}} (click)="onChangeTheme()">
       <fa-icon *ngIf="appService.darkTheme" [icon]="faSun"></fa-icon>
       <fa-icon *ngIf="!appService.darkTheme" [icon]="faMoon"></fa-icon>
     </button>
