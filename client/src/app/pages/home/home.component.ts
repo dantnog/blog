@@ -9,7 +9,7 @@ import { Styles } from 'src/app/app.styles';
 export class HomeComponent {
   s = Styles
 
-  constructor(public appService: AppService) {}
+  constructor(public app: AppService) {}
 
   onOpen(postId: number) {
     alert(`Open ${postId}`)

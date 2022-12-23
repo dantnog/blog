@@ -1,5 +1,5 @@
 <div class={{s.home}}>
-  <figure *ngFor="let post of appService.posts" class={{s.figure}}>
+  <figure *ngFor="let post of app.posts" class={{s.figure}}>
     <img src="" alt="Image" class={{s.figimage}}>
     <figcaption class={{s.figcaption}}>
       <p class={{s.figdate}}>
@@ -16,10 +16,10 @@
           <button class={{s.pributtongroup}} (click)="onOpen(post.id)">
             Open
           </button>
-          <button class={{s.secbuttongroup}} (click)="onEdit(post.id)" *ngIf="appService.isAdmin">
+          <button class={{s.secbuttongroup}} (click)="onEdit(post.id)" *ngIf="app.isAdmin">
             Edit
           </button>
-          <button class={{s.danbuttongroup}} (click)="onDelete(post.id)" *ngIf="appService.isAdmin">
+          <button class={{s.danbuttongroup}} (click)="onDelete(post.id)" *ngIf="app.isAdmin">
             Delete
           </button>
         </div>

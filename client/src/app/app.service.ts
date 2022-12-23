@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AppService {
-  darkTheme: boolean = false
   isAdmin: boolean = true
   isAuth: boolean = true
 
@@ -14,22 +13,5 @@ export class AppService {
     {id: 3, title: 'Anything', desc: 'Random words', date: '23-12-2022'},
   ]
 
-  constructor() {
-  }
-
-  changeTheme(): void {
-    this.darkTheme
-    ? document.documentElement.classList.remove('dark')
-    : document.documentElement.classList.add('dark')
-
-    this.darkTheme = !this.darkTheme
-    localStorage.setItem('darkTheme', String(this.darkTheme))
-  }
-
-  loadTheme(): void {
-    if (localStorage.getItem('darkTheme') === 'true') {
-      this.darkTheme = true
-      document.documentElement.classList.add('dark')
-    }
-  }
+  constructor() {}
 }

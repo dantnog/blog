@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from 'src/app/app.service';
+import { ThemeService } from 'src/app/services/theme.service';
 import { Styles } from 'src/app/app.styles';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,9 +13,12 @@ export class HeaderComponent {
   faMoon = faMoon 
   faSun = faSun
 
-  constructor(public appService: AppService) {}
+  constructor(
+    public app: AppService,
+    public theme: ThemeService
+  ) {}
 
   onChangeTheme() {
-    this.appService.changeTheme()
+    this.theme.changeTheme()
   }
 }
