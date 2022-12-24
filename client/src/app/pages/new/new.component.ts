@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Styles } from 'src/app/app.styles';
+import { ApiPostService } from 'src/app/services/api-post.service';
 
 @Component({
   selector: 'app-new',
@@ -10,7 +12,10 @@ export class NewComponent implements OnInit {
   s = Styles
   postForm!: FormGroup
 
-  constructor() {}
+  constructor(
+    private apiPost: ApiPostService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.postForm = new FormGroup({
@@ -34,8 +39,8 @@ export class NewComponent implements OnInit {
   get desc() { return this.postForm.get('desc')! }
   get text() { return this.postForm.get('text')! }
   
-
-  onSubmit() {
-    alert(this.postForm?.value.title)
+  async onSubmit() {
+    const res = await this.apiPost.create(this.postForm)
+    if (res === true) this.router.navigate(['/'])
   }
 }
