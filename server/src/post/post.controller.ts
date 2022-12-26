@@ -1,14 +1,22 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { PostService } from './post.service';
 import { PostDto } from 'src/post/dto';
+import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
 
 @Controller('post')
 export class PostController {
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+  ) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  createPost(@Body() dto: PostDto) {
-    return this.postService.createPost(dto)
+  async createPost(
+    @Body() dto: PostDto,
+    @Req() req: Request
+  ) {
+    return this.postService.createPost(dto, req.user)
   }
 
   @Get()
@@ -21,16 +29,22 @@ export class PostController {
     return this.postService.getOne(id)
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   updatePost(
     @Body() dto: PostDto,
-    @Param('id') id: string 
+    @Param('id') id: string,
+    @Req() req: Request
   ) {
-    return this.postService.update(id, dto)
+    return this.postService.update(id, dto, req.user)
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
-  deletePost(@Param('id') id: string) {
-    return this.postService.deletePost(id)
+  deletePost(
+    @Param('id') id: string,
+    @Req() req: Request
+  ) {
+    return this.postService.deletePost(id, req.user)
   }
 }

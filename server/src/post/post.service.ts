@@ -1,18 +1,22 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PostService {
   constructor(private prisma: PrismaService) {}
 
-  async createPost(dto) {
+  async createPost(dto, decodedToken) {
     try {
+      if (await this.checkIfUserNotExists(decodedToken.id)) {
+        throw new UnauthorizedException('User not found')
+      }
       const result = await this.prisma.post.create({
         data: {
           title: dto.title,
           desc: dto.desc,
           text: dto.text,
-          slug: this.createSlug(dto.title)
+          slug: this.createSlug(dto.title),
+          user_id: decodedToken.id
         },
       })
       return result
@@ -44,8 +48,11 @@ export class PostService {
     }
   }
 
-  async update(id: string, dto) {
+  async update(id: string, dto, decodedToken) {
     try {
+      if (await this.checkIfUserNotExists(decodedToken.id)) {
+        throw new UnauthorizedException('User not found')
+      }
       const result = await this.prisma.post.update({
         where: {id: Number(id)},
         data: {
@@ -61,8 +68,11 @@ export class PostService {
     }
   }
 
-  async deletePost(id: string) {
+  async deletePost(id: string, decodedToken) {
     try {
+      if (await this.checkIfUserNotExists(decodedToken.id)) {
+        throw new UnauthorizedException('User not found')
+      }
       await this.prisma.post.delete({where: {id: Number(id)}})
       return this.getAll()
     } catch(err) {
@@ -77,5 +87,11 @@ export class PostService {
     // change spaces
     str = str.replace(/\W+/g, '-')
     return str
+  }
+
+  async checkIfUserNotExists(id) {
+    const user = await this.prisma.user.findUnique({where: {id: id}})
+    if (!user) return true
+    return false
   }
 }
