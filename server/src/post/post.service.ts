@@ -23,7 +23,12 @@ export class PostService {
 
   async getAll() {
     try {
-      const result = await this.prisma.post.findMany({take: 20})
+      const result = await this.prisma.post.findMany({
+        take: 20,
+        orderBy: {
+          updatedAt: 'desc'
+        }
+      })
       return result
     } catch(err) {
       throw new InternalServerErrorException('Failed to get all posts')

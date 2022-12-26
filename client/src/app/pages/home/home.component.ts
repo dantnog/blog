@@ -4,7 +4,7 @@ import { Styles } from 'src/app/app.styles';
 import { ApiPostService } from 'src/app/services/api-post.service';
 import { Router } from '@angular/router';
 
-interface postProps {
+interface PostProps {
   id: number 
   title: string 
   desc: string 
@@ -37,11 +37,19 @@ export class HomeComponent implements OnInit {
     alert(`Open ${postId}`)
   }
 
-  onEdit(post: postProps) {
+  onEdit(post: PostProps) {
     this.router.navigateByUrl(`/edit/${post.id}/${post.slug}`)
   }
 
   onDelete(postId: number) {
     alert(`Delete ${postId}`)
+  }
+
+  lastModification(post: PostProps): string {
+    if (post.createdAt.split('T')[0] > post.updatedAt.split('T')[0] ) {
+      return post.createdAt.split('T')[0]
+    } else {
+      return post.updatedAt.split('T')[0]
+    }
   }
 }

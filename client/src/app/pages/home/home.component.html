@@ -3,7 +3,7 @@
     <img src="" alt="Image" class={{s.figimage}}>
     <figcaption class={{s.figcaption}}>
       <p class={{s.figdate}}>
-        {{post.createdAt.split('T')[0]}}
+        {{lastModification(post)}}
       </p>
       <h3 class={{s.figtitle}}>
         {{post.title}}
