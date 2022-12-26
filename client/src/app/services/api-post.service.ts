@@ -39,4 +39,15 @@ export class ApiPostService {
   getOne(id: number): Observable<any> {
     return this.http.get(`${host}post/${id}`)
   }
+
+  update(postForm: FormGroup, idParam: number): Observable<any> {
+    return this.http.patch(
+      `${host}post/${idParam}`,
+      {
+        title: postForm.value.title,
+        desc: postForm.value.desc,
+        text: postForm.value.text
+      }
+    )
+  }
 }

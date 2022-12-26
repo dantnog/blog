@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { Styles } from 'src/app/app.styles';
 import { ApiPostService } from 'src/app/services/api-post.service';
 
@@ -53,7 +54,16 @@ export class EditComponent implements OnInit {
   get text() { return this.postForm.get('text')! }
   
   async onSubmit() {
-    const res = await this.apiPost.create(this.postForm)
-    if (res === true) this.router.navigate(['/'])
+    this.apiPost.update(this.postForm, this.idParam)
+    .pipe(
+      catchError(err => {
+        console.error(err)
+        return throwError('ERROR')
+      })
+    )
+    .subscribe(res => {
+      console.log(res)
+      this.router.navigate(['/'])
+    })
   }
 }

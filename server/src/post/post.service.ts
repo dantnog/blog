@@ -24,7 +24,6 @@ export class PostService {
   async getAll() {
     try {
       const result = await this.prisma.post.findMany({take: 20})
-      console.log(result)
       return result
     } catch(err) {
       throw new InternalServerErrorException('Failed to get all posts')
@@ -34,6 +33,24 @@ export class PostService {
   async getOne(id: string) {
     try {
       const result = await this.prisma.post.findUnique({where: {id: Number(id)}})
+      return result
+    } catch(err) {
+      throw new InternalServerErrorException('Failed to get post')
+    }
+  }
+
+  async update(id: string, dto) {
+    try {
+      const result = await this.prisma.post.update({
+        where: {id: Number(id)},
+        data: {
+          title: dto.title,
+          desc: dto.desc,
+          text: dto.text,
+          slug: this.createSlug(dto.title)
+        }
+      })
+      console.log(result)
       return result
     } catch(err) {
       throw new InternalServerErrorException('Failed to get post')
