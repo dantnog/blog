@@ -33,5 +33,13 @@ export const Styles = {
   label: 'block text-sm',
   inputtext: 'block px-2 py-1 border-2 border-gray-500/50 bg-gray-100 dark:bg-gray-900 outline-none focus:ring-4 ring-sky-500/50 rounded-md',
   formbuttons: 'flex justify-end space-x-4',
-  inputspan: 'text-sm font-semibold text-amber-500'
+  inputspan: 'text-sm font-semibold text-amber-500',
+
+  postpage: 'max-w-2xl mx-auto space-y-4 my-4',
+  postbuttons: 'flex',
+  postimage: 'object-cover h-60 bg-gray-500/50',
+  posth1: 'text-sky-400 text-3xl',
+  postdesc: 'text-xl',
+  postdate: 'ml-8',
+  posttext: '',
 }

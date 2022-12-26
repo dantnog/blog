@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit {
     .subscribe(res => this.allPosts = res)
   }
 
-  onOpen(postId: number) {
-    alert(`Open ${postId}`)
+  onOpen(post: PostProps) {
+    this.router.navigateByUrl(`/post/${post.id}/${post.slug}`)
   }
 
   onEdit(post: PostProps) {

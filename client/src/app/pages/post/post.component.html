@@ -1,0 +1,30 @@
+<div class={{s.postpage}}>
+  <img src="" alt="Image" class={{s.postimage}}>
+
+  <div class={{s.postbuttons}}>
+    <div class={{s.groupbutton}}>
+      <button *ngIf="app.isAdmin" class={{s.secbuttongroup}} (click)="onEdit()">
+        Edit
+      </button>
+      <button *ngIf="app.isAdmin" class={{s.danbuttongroup}} (click)="onDelete()">
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <h1 class={{s.posth1}}>
+    {{post?.title}}
+  </h1>
+  <h3 class={{s.postdesc}}>
+    {{post?.desc}}
+  </h3>
+  <p class="">
+    Created at: {{post.createdAt.split('T')[0]}}
+    <span *ngIf="wasUpdated()" class={{s.postdate}}>
+      Updated at: {{post.updatedAt.split('T')[0]}}
+    </span>
+  </p>
+  <p class={{s.posttext}}>
+    {{post?.text}}
+  </p>
+</div>

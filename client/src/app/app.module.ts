@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewComponent } from './pages/new/new.component';
 import { EditComponent } from './pages/edit/edit.component';
+import { PostComponent } from './pages/post/post.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { EditComponent } from './pages/edit/edit.component';
     HeaderComponent,
     HomeComponent,
     NewComponent,
-    EditComponent
+    EditComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
