@@ -17,7 +17,17 @@ export class PostService {
       })
       return result
     } catch(err) {
-      throw new InternalServerErrorException
+      throw new InternalServerErrorException('Failed to create post')
+    }
+  }
+
+  async getAll() {
+    try {
+      const result = await this.prisma.post.findMany({take: 20})
+      console.log(result)
+      return result
+    } catch(err) {
+      throw new InternalServerErrorException('Failed to get all posts')
     }
   }
 

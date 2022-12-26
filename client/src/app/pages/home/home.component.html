@@ -1,9 +1,9 @@
 <div class={{s.home}}>
-  <figure *ngFor="let post of app.posts" class={{s.figure}}>
+  <figure *ngFor="let post of allPosts" class={{s.figure}}>
     <img src="" alt="Image" class={{s.figimage}}>
     <figcaption class={{s.figcaption}}>
       <p class={{s.figdate}}>
-        {{post.date}}
+        {{post.createdAt.split('T')[0]}}
       </p>
       <h3 class={{s.figtitle}}>
         {{post.title}}

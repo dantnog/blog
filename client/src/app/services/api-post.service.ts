@@ -31,4 +31,8 @@ export class ApiPostService {
 
     return true
   }
+
+  getAll(): Observable<any> {
+    return this.http.get(`${host}post`)
+  }
 }
