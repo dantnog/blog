@@ -50,4 +50,8 @@ export class ApiPostService {
       }
     )
   }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${host}post/${id}`)
+  }
 }

@@ -43,7 +43,14 @@ export class PostComponent implements OnInit {
   }
 
   onDelete() {
-    alert(`Delete ${this.post.id}`)
+    this.apiPost.delete(this.post.id)
+    .subscribe(res => {
+      this.redirect()
+    })
+  }
+
+  redirect() {
+    this.router.navigate(['/'])
   }
 
   wasUpdated() {

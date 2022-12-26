@@ -28,21 +28,25 @@ export class HomeComponent implements OnInit {
     public router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.apiPost.getAll()
     .subscribe(res => this.allPosts = res)
   }
 
-  onOpen(post: PostProps) {
+  onOpen(post: PostProps): void {
     this.router.navigateByUrl(`/post/${post.id}/${post.slug}`)
   }
 
-  onEdit(post: PostProps) {
+  onEdit(post: PostProps): void {
     this.router.navigateByUrl(`/edit/${post.id}/${post.slug}`)
   }
 
-  onDelete(postId: number) {
-    alert(`Delete ${postId}`)
+  onDelete(id: number): void {
+    this.apiPost.delete(id)
+    .subscribe(res => {
+      this.allPosts = res
+      console.log(res)
+    })
   }
 
   lastModification(post: PostProps): string {

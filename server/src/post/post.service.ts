@@ -55,10 +55,18 @@ export class PostService {
           slug: this.createSlug(dto.title)
         }
       })
-      console.log(result)
       return result
     } catch(err) {
       throw new InternalServerErrorException('Failed to get post')
+    }
+  }
+
+  async deletePost(id: string) {
+    try {
+      await this.prisma.post.delete({where: {id: Number(id)}})
+      return this.getAll()
+    } catch(err) {
+      throw new InternalServerErrorException('Failed to delete post')
     }
   }
 
