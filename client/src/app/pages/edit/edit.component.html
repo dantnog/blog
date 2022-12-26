@@ -1,0 +1,78 @@
+<div class={{s.newpost}}>
+  <div class={{s.form}} [formGroup]="postForm">
+
+    <h2 class={{s.formh2}}>
+      Create new post
+    </h2>
+
+    <div class={{s.formcontrol}}>
+      <label for="title" class={{s.label}}>
+        Title
+      </label>
+      <input type="text" 
+      id="title" 
+      formControlName="title"
+      required
+      class={{s.inputtext}}>
+      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="">
+        <span *ngIf="title.errors?.['required']" class={{s.inputspan}}>
+          This field is required
+        </span>
+        <span *ngIf="title.errors?.['minlength']" class={{s.inputspan}}>
+          Minimum of 10 characteres
+        </span>
+        <span *ngIf="title.errors?.['maxlength']" class={{s.inputspan}}>
+          Maximum of 100 characteres
+        </span>
+      </div>
+    </div>
+
+    <div class={{s.formcontrol}}>
+      <label for="desc" class={{s.label}}>
+        Description
+      </label>
+      <input type="text" 
+      id="desc" 
+      formControlName="desc" 
+      required
+      class={{s.inputtext}}>
+      <div *ngIf="desc.invalid && (desc.dirty || desc.touched)" class="">
+        <span *ngIf="title.errors?.['required']" class={{s.inputspan}}>
+          This field is required
+        </span>
+        <span *ngIf="desc.errors?.['maxlength']" class={{s.inputspan}}>
+          Maximum of 180 characteres
+        </span>
+      </div>
+    </div>
+
+    <div class={{s.formcontrol}}>
+      <label for="text" class={{s.label}}>
+        Content
+      </label>
+      <textarea id="text" 
+      rows="10" 
+      formControlName="text" 
+      required
+      class="{{s.inputtext}}"></textarea>
+      <div *ngIf="title.invalid && (text.dirty || text.touched)" class="">
+        <span *ngIf="text.errors?.['required']" class={{s.inputspan}}>
+          This field is required
+        </span>
+        <span *ngIf="text.errors?.['maxlength']" class={{s.inputspan}}>
+          Maximum of 2000 characteres
+        </span>
+      </div>
+    </div>
+
+    <div class={{s.formbuttons}}>
+      <a routerLink="/" class={{s.secbutton}}>
+        Cancel
+      </a>
+      <button class={{s.pributton}} type="button" (click)="onSubmit()">
+        Save
+      </button>
+    </div>
+
+  </div>
+</div>

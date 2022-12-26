@@ -35,4 +35,8 @@ export class ApiPostService {
   getAll(): Observable<any> {
     return this.http.get(`${host}post`)
   }
+
+  getOne(id: number): Observable<any> {
+    return this.http.get(`${host}post/${id}`)
+  }
 }

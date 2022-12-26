@@ -16,7 +16,7 @@
           <button class={{s.pributtongroup}} (click)="onOpen(post.id)">
             Open
           </button>
-          <button class={{s.secbuttongroup}} (click)="onEdit(post.id)" *ngIf="app.isAdmin">
+          <button class={{s.secbuttongroup}} (click)="onEdit(post)" *ngIf="app.isAdmin">
             Edit
           </button>
           <button class={{s.danbuttongroup}} (click)="onDelete(post.id)" *ngIf="app.isAdmin">

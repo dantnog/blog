@@ -2,6 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Styles } from 'src/app/app.styles';
 import { ApiPostService } from 'src/app/services/api-post.service';
+import { Router } from '@angular/router';
+
+interface postProps {
+  id: number 
+  title: string 
+  desc: string 
+  text: string 
+  slug: string
+  createdAt: string 
+  updatedAt: string 
+}
 
 @Component({
   selector: 'app-home',
@@ -13,7 +24,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public app: AppService,
-    public apiPost: ApiPostService
+    public apiPost: ApiPostService,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -25,8 +37,8 @@ export class HomeComponent implements OnInit {
     alert(`Open ${postId}`)
   }
 
-  onEdit(postId: number) {
-    alert(`Edit ${postId}`)
+  onEdit(post: postProps) {
+    this.router.navigateByUrl(`/edit/${post.id}/${post.slug}`)
   }
 
   onDelete(postId: number) {

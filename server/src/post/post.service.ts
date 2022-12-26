@@ -31,6 +31,15 @@ export class PostService {
     }
   }
 
+  async getOne(id: string) {
+    try {
+      const result = await this.prisma.post.findUnique({where: {id: Number(id)}})
+      return result
+    } catch(err) {
+      throw new InternalServerErrorException('Failed to get post')
+    }
+  }
+
   createSlug(str: string) {
     str = str.toLowerCase()
     // remove accents
