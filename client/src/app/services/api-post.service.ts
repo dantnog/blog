@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { host } from './api-host';
-import { throwError, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -12,8 +11,8 @@ export class ApiPostService {
 
   constructor(private http: HttpClient) {}
 
-  async create(postForm: FormGroup) {
-    await this.http.post(
+  create(postForm: FormGroup) {
+    return this.http.post(
       `${host}post`,
       {
         title: postForm.value.title,
@@ -21,15 +20,6 @@ export class ApiPostService {
         text: postForm.value.text
       }
     )
-    .pipe(
-      catchError(err => {
-        console.error(err)
-        return throwError('ERROR')
-      })
-    )
-    .subscribe(res => console.log(res))
-
-    return true
   }
 
   getAll(): Observable<any> {
