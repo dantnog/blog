@@ -36,4 +36,10 @@ export class AppService {
     localStorage.setItem('user', JSON.stringify(this.user))
   }
 
+  logout() {
+    this.isAdmin = false
+    this.isAuth = false
+    this.user = null
+    localStorage.removeItem('user')
+  }
 }

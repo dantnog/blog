@@ -16,6 +16,9 @@
     <a routerLink="/register" *ngIf="!app.isAuth" class={{s.linkbutton}}>
       Register
     </a>
+    <button *ngIf="app.isAuth" class={{s.linkbutton}} (click)="onLogout()">
+      Logout
+    </button>
     <button class={{s.linkbutton}} (click)="onChangeTheme()">
       <fa-icon *ngIf="theme.darkTheme" [icon]="faSun"></fa-icon>
       <fa-icon *ngIf="!theme.darkTheme" [icon]="faMoon"></fa-icon>

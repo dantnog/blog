@@ -21,4 +21,8 @@ export class HeaderComponent {
   onChangeTheme() {
     this.theme.changeTheme()
   }
+
+  onLogout() {
+    this.app.logout()
+  }
 }
