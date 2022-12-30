@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 import { Styles } from 'src/app/app.styles';
 import { ApiUserService } from 'src/app/services/api-user.service';
 
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit{
 
   constructor(
     private apiUser: ApiUserService,
-    private router: Router
+    private router: Router,
+    private app: AppService
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +65,7 @@ export class RegisterComponent implements OnInit{
       )
       .subscribe(res => {
         console.log(res)
+        this.app.setUser(res)
         this.router.navigate(['/'])
       })
   }
