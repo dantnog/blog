@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { host } from './api-host';
 import { throwError, Observable } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({

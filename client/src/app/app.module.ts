@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewComponent } from './pages/new/new.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { PostComponent } from './pages/post/post.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PostComponent } from './pages/post/post.component';
     HomeComponent,
     NewComponent,
     EditComponent,
-    PostComponent
+    PostComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

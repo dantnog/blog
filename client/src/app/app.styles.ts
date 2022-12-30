@@ -8,6 +8,7 @@ export const Styles = {
   nav: 'space-x-2',
 
   centerbox: 'flex justify-center',
+  rightbox: 'flex justify-end',
 
   linkbutton: `${btnbase} hover:bg-sky-500/50 rounded-md`,
   pributton: `${btnbase} bg-sky-600 hover:bg-sky-500 rounded-md`,
@@ -42,4 +43,6 @@ export const Styles = {
   postdesc: 'text-xl',
   postdate: 'ml-8',
   posttext: '',
+
+  userform: 'mx-auto max-w-sm py-4 sm:py-8 px-4',
 }
