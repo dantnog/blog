@@ -1,8 +1,14 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as argon from 'argon2';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { RegisterDto, LoginDto } from './dto';
 
 @Injectable()
 export class UserService {
@@ -12,7 +18,7 @@ export class UserService {
     private config: ConfigService,
   ) {}
 
-  async register(dto) {
+  async register(dto: RegisterDto) {
     try {
       const user = await this.prisma.user.create({
         data: {
@@ -27,6 +33,30 @@ export class UserService {
 
       return user;
     } catch (err) {
+      console.log(err);
+      throw new InternalServerErrorException('Failed to register user');
+    }
+  }
+
+  async login(dto: LoginDto) {
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: { email: dto.email },
+      });
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+
+      if (!(await argon.verify(user.password, dto.password))) {
+        throw new ForbiddenException('Incorrect password');
+      }
+      delete user.password;
+
+      user['token'] = this.signToken(user.id, user.email);
+
+      return user;
+    } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException('Failed to register user');
     }
   }
