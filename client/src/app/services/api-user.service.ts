@@ -22,4 +22,14 @@ export class ApiUserService {
     )
   }
 
+  login(userForm: FormGroup): Observable<any> {
+    return this.http.post(
+      `${host}user/login`,
+      {
+        email: userForm.value.email,
+        password: userForm.value.password
+      }
+    )
+  }
+
 }

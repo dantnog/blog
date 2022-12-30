@@ -12,6 +12,7 @@ import { NewComponent } from './pages/new/new.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { PostComponent } from './pages/post/post.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RegisterComponent } from './pages/register/register.component';
     EditComponent,
     PostComponent,
     RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

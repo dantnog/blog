@@ -1,0 +1,64 @@
+<div class={{s.userform}}>
+  <form [formGroup]="userForm" class={{s.form}}>
+
+    <h2 class={{s.formh2}}>
+      Login
+    </h2>
+
+    <div class={{s.formcontrol}}>
+      <label for="email" class={{s.label}}>
+        Email
+      </label>
+      <input 
+      type="text" 
+      id="email" 
+      name="email"
+      required
+      formControlName="email"
+      class={{s.inputtext}}>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="">
+        <span *ngIf="email.errors?.['required']" class={{s.inputspan}}>
+          This field is required
+        </span>
+        <span *ngIf="email.errors?.['maxlength']" class={{s.inputspan}}>
+          Maximum of 50 characteres
+        </span>
+      </div>
+    </div>
+    
+
+    <div class={{s.formcontrol}}>
+      <label for="password" class={{s.label}}>
+        Password
+      </label>
+      <input 
+      type="password" 
+      id="password" 
+      name="password"
+      required
+      formControlName="password"
+      class={{s.inputtext}}>
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="">
+        <span *ngIf="password.errors?.['required']" class={{s.inputspan}}>
+          This field is required
+        </span>
+        <span *ngIf="password.errors?.['minlength']" class={{s.inputspan}}>
+          Minimum of 8 characteres
+        </span>
+        <span *ngIf="password.errors?.['maxlength']" class={{s.inputspan}}>
+          Maximum of 50 characteres
+        </span>
+      </div>
+    </div>
+
+    <span *ngIf="wrongPass" class={{s.inputspan}}>
+      Wrong password
+    </span>
+
+    <div class={{s.rightbox}}>
+      <button type="button" class={{s.pributton}} (click)="onSubmit()">
+        Login
+      </button>
+    </div>
+  </form>
+</div>
