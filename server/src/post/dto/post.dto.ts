@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class PostDto {
   @IsString()
@@ -17,5 +23,6 @@ export class PostDto {
   @MaxLength(2000)
   text: string;
 
+  @IsOptional()
   image: any;
 }

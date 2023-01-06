@@ -25,7 +25,9 @@ export class PostService {
         },
       });
       console.log(
-        `[${new Date(Date.now()).toLocaleTimeString()}] [CREATE POST] Post created.`,
+        `[${new Date(
+          Date.now(),
+        ).toLocaleTimeString()}] [CREATE POST] Post created.`,
       );
       return result;
     } catch (err) {
@@ -43,7 +45,9 @@ export class PostService {
         },
       });
       console.log(
-        `[${new Date(Date.now()).toLocaleTimeString()}] [GET ALL POSTS] All posts fetched.`,
+        `[${new Date(
+          Date.now(),
+        ).toLocaleTimeString()}] [GET ALL POSTS] All posts fetched.`,
       );
       return result;
     } catch (err) {
@@ -58,7 +62,9 @@ export class PostService {
         where: { id: Number(id) },
       });
       console.log(
-        `[${new Date(Date.now()).toLocaleTimeString()}] [GET POST] Post fetched.`,
+        `[${new Date(
+          Date.now(),
+        ).toLocaleTimeString()}] [GET POST] Post fetched.`,
       );
       return result;
     } catch (err) {
@@ -67,22 +73,28 @@ export class PostService {
     }
   }
 
-  async update(id: string, dto, decodedToken) {
+  async update(id: string, dto, decodedToken, image) {
     try {
       if (await this.checkIfUserNotExists(decodedToken.id)) {
         throw new UnauthorizedException('User not found');
       }
+
+      const toUpdate = {
+        title: dto.title,
+        desc: dto.desc,
+        text: dto.text,
+        slug: this.createSlug(dto.title),
+      };
+      if (image) toUpdate['image'] = image.filename;
+
       const result = await this.prisma.post.update({
         where: { id: Number(id) },
-        data: {
-          title: dto.title,
-          desc: dto.desc,
-          text: dto.text,
-          slug: this.createSlug(dto.title),
-        },
+        data: toUpdate,
       });
       console.log(
-        `[${new Date(Date.now()).toLocaleTimeString()}] [UPDATE POST] Post updated.`,
+        `[${new Date(
+          Date.now(),
+        ).toLocaleTimeString()}] [UPDATE POST] Post updated.`,
       );
       return result;
     } catch (err) {
@@ -98,7 +110,9 @@ export class PostService {
       }
       await this.prisma.post.delete({ where: { id: Number(id) } });
       console.log(
-        `[${new Date(Date.now()).toLocaleTimeString()}] [DELETE POST] Post deleted.`,
+        `[${new Date(
+          Date.now(),
+        ).toLocaleTimeString()}] [DELETE POST] Post deleted.`,
       );
       return this.getAll();
     } catch (err) {

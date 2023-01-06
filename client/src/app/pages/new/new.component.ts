@@ -52,7 +52,6 @@ export class NewComponent implements OnInit {
       text: this.postForm.get('text')?.value,
       image: image,
     })
-    console.log(this.postForm)
   }
 
   async onSubmit() {

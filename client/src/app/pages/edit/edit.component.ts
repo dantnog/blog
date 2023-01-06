@@ -37,14 +37,17 @@ export class EditComponent implements OnInit {
         Validators.required,
         Validators.maxLength(2000) 
       ]),
+      image: new FormControl('')
     })
 
     this.apiPost.getOne(this.idParam)
     .subscribe(res => {
+      console.log(res)
       this.postForm.setValue({
         title: res.title,
         desc: res.desc,
-        text: res.text
+        text: res.text,
+        image: ''
       })
     })
   }
@@ -52,13 +55,24 @@ export class EditComponent implements OnInit {
   get title() { return this.postForm.get('title')! }
   get desc() { return this.postForm.get('desc')! }
   get text() { return this.postForm.get('text')! }
-  
+  get image() { return this.postForm.get('image')! }
+
+  onChangeImage(image: any) {
+    image = image.files[0]
+    this.postForm.setValue({
+      title: this.postForm.get('title')?.value,
+      desc: this.postForm.get('desc')?.value,
+      text: this.postForm.get('text')?.value,
+      image: image,
+    })
+  }
+
   async onSubmit() {
     this.apiPost.update(this.postForm, this.idParam)
     .pipe(
       catchError(err => {
         console.error(err)
-        return throwError('ERROR')
+        return throwError('error')
       })
     )
     .subscribe(res => {

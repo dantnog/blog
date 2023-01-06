@@ -70,12 +70,35 @@ export class PostController {
 
   @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './public/posts',
+        filename: (req, file, callback) => {
+          const filename = `${Date.now()}${Math.floor(
+            Math.random() * 1000,
+          )}${extname(file.originalname)}`;
+
+          callback(null, filename);
+        },
+      }),
+    }),
+  )
   updatePost(
     @Body() dto: PostDto,
     @Param('id') id: string,
     @Req() req: Request,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 2_000_000 }),
+          new FileTypeValidator({ fileType: 'image/jpeg' }),
+        ],
+      }),
+    )
+    image: Express.Multer.File,
   ) {
-    return this.postService.update(id, dto, req.user);
+    return this.postService.update(id, dto, req.user, image);
   }
 
   @UseGuards(AuthGuard('jwt'))
