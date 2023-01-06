@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { Styles } from 'src/app/app.styles';
+import { host } from 'src/app/services/api-host';
 import { ApiPostService } from 'src/app/services/api-post.service';
 
 interface PostProps {
@@ -10,6 +11,7 @@ interface PostProps {
   desc: string 
   text: string 
   slug: string
+  image: string
   createdAt: string 
   updatedAt: string 
 }
@@ -19,6 +21,7 @@ interface PostProps {
   templateUrl: './post.component.html',
 })
 export class PostComponent implements OnInit {
+  host = host
   s = Styles
   post!: PostProps
 
@@ -35,6 +38,7 @@ export class PostComponent implements OnInit {
     this.apiPost.getOne(idParam)
     .subscribe(res => {
       this.post = res
+      console.log(res)
     })
   }
 

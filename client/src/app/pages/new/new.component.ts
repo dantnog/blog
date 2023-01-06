@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { Styles } from 'src/app/app.styles';
@@ -33,19 +33,28 @@ export class NewComponent implements OnInit {
         Validators.required,
         Validators.maxLength(2000) 
       ]),
+      image: new FormControl('', [
+        Validators.required
+      ]),
     })
   }
 
   get title() { return this.postForm.get('title')! }
   get desc() { return this.postForm.get('desc')! }
   get text() { return this.postForm.get('text')! }
+  get image() { return this.postForm.get('image')! }
   
+  onChangeImage(image: any) {
+    image = image.files[0]
+    this.postForm.setValue({title: 'Abracadabra Cadibra', desc: 'Magia', text: 'Magia do bem', image: image})
+  }
+
   async onSubmit() {
     await this.apiPost.create(this.postForm)
       .pipe(
         catchError(err => {
           console.error(err)
-          return throwError('ERROR')
+          return throwError('error')
         })
       )
       .subscribe(res => {

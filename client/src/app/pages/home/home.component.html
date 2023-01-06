@@ -1,6 +1,8 @@
 <div class={{s.home}}>
   <figure *ngFor="let post of allPosts" class={{s.figure}}>
-    <img src="" alt="Image" class={{s.figimage}}>
+    <div class={{s.figimagediv}}>
+      <img src="{{host+'posts/'+post.image}}" alt="Image" class={{s.figimage}}>
+    </div>
     <figcaption class={{s.figcaption}}>
       <p class={{s.figdate}}>
         {{lastModification(post)}}

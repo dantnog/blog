@@ -35,4 +35,5 @@ model Post {
   desc      String 
   text      String @db.Text
   slug      String
+  image     String
 }

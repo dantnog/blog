@@ -17,19 +17,22 @@ export class ApiPostService {
 
   getHeaders(): HttpHeaders {
     const Headers = new HttpHeaders({
-      Authorization: `Bearer ${this.app.user?.token}`
+      Authorization: `Bearer ${this.app.user?.token}`,
     })
+
     return Headers
   }
 
-  create(postForm: FormGroup) {
+  create(postForm: FormGroup): Observable<any> {
+    let fd = new FormData()
+    fd.append('title', postForm.value.title)
+    fd.append('desc', postForm.value.desc)
+    fd.append('text', postForm.value.text)
+    fd.append('image', postForm.value.image)
+
     return this.http.post(
       `${host}post`,
-      {
-        title: postForm.value.title,
-        desc: postForm.value.desc,
-        text: postForm.value.text
-      },
+      fd,
       {
         headers: this.getHeaders()
       }
@@ -45,13 +48,15 @@ export class ApiPostService {
   }
 
   update(postForm: FormGroup, idParam: number): Observable<any> {
+    let fd = new FormData()
+    fd.append('title', postForm.value.title)
+    fd.append('desc', postForm.value.desc)
+    fd.append('text', postForm.value.text)
+    fd.append('image', postForm.value.image)
+
     return this.http.patch(
       `${host}post/${idParam}`,
-      {
-        title: postForm.value.title,
-        desc: postForm.value.desc,
-        text: postForm.value.text
-      },
+      fd,
       {
         headers: this.getHeaders()
       }

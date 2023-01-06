@@ -3,6 +3,7 @@ import { AppService } from 'src/app/app.service';
 import { Styles } from 'src/app/app.styles';
 import { ApiPostService } from 'src/app/services/api-post.service';
 import { Router } from '@angular/router';
+import { host } from '../../services/api-host';
 
 interface PostProps {
   id: number 
@@ -19,6 +20,7 @@ interface PostProps {
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
+  host = host
   s = Styles
   allPosts!: any
 

@@ -20,7 +20,8 @@ export const Styles = {
 
   home: 'grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-screen p-4 sm:p-8',
   figure: 'bg-gray-200 dark:bg-gray-800 overflow-hidden rounded-md',
-  figimage: 'bg-gray-300 object-cover h-36',
+  figimagediv: 'bg-gray-300 h-44 overflow-hidden grid place-items-center',
+  figimage: 'object-cover',
   figcaption: 'p-4 space-y-2',
   figtitle: 'text-lg font-semibold truncate',
   figdesc: '',
@@ -38,7 +39,8 @@ export const Styles = {
 
   postpage: 'max-w-2xl mx-auto space-y-4 my-4',
   postbuttons: 'flex',
-  postimage: 'object-cover h-60 bg-gray-500/50',
+  postimagediv: 'overflow-hidden min-h-60 max-h-96 bg-gray-500/50',
+  postimage: 'object-cover ',
   posth1: 'text-sky-400 text-3xl',
   postdesc: 'text-xl',
   postdate: 'ml-8',

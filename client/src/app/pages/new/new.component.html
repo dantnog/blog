@@ -55,12 +55,31 @@
       formControlName="text" 
       required
       class="{{s.inputtext}}"></textarea>
-      <div *ngIf="title.invalid && (text.dirty || text.touched)" class="">
+      <div *ngIf="text.invalid && (text.dirty || text.touched)" class="">
         <span *ngIf="text.errors?.['required']" class={{s.inputspan}}>
           This field is required
         </span>
         <span *ngIf="text.errors?.['maxlength']" class={{s.inputspan}}>
           Maximum of 2000 characteres
+        </span>
+      </div>
+    </div>
+
+    <div class={{s.formcontrol}}>
+      <label for="image" class={{s.label}}>
+        Image
+      </label>
+      <input 
+      type="file" 
+      name="image" 
+      id="image"
+      #imageField
+      (change)="onChangeImage(imageField)"
+      required
+      class="{{s.inputtext}}">
+      <div *ngIf="image.invalid && (image.dirty || image.touched)" class="">
+        <span *ngIf="image.errors?.['required']" class={{s.inputspan}}>
+          This field is required
         </span>
       </div>
     </div>
