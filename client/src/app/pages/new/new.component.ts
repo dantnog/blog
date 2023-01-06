@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { Styles } from 'src/app/app.styles';
@@ -46,7 +46,13 @@ export class NewComponent implements OnInit {
   
   onChangeImage(image: any) {
     image = image.files[0]
-    this.postForm.setValue({title: 'Abracadabra Cadibra', desc: 'Magia', text: 'Magia do bem', image: image})
+    this.postForm.setValue({
+      title: this.postForm.get('title')?.value,
+      desc: this.postForm.get('desc')?.value,
+      text: this.postForm.get('text')?.value,
+      image: image,
+    })
+    console.log(this.postForm)
   }
 
   async onSubmit() {
