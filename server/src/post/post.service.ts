@@ -3,6 +3,8 @@ import {
   InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { error } from 'console';
+import * as fs from 'fs';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -108,7 +110,13 @@ export class PostService {
       if (await this.checkIfUserNotExists(decodedToken.id)) {
         throw new UnauthorizedException('User not found');
       }
+      const post = await this.prisma.post.findUnique({
+        where: { id: Number(id) },
+      });
       await this.prisma.post.delete({ where: { id: Number(id) } });
+
+      this.deleteImage(post.image);
+
       console.log(
         `[${new Date(
           Date.now(),
@@ -134,5 +142,11 @@ export class PostService {
     const user = await this.prisma.user.findUnique({ where: { id: id } });
     if (!user) return true;
     return false;
+  }
+
+  async deleteImage(image: string) {
+    await fs.unlink(`public/posts/${image}`, (error) => {
+      console.log(error);
+    });
   }
 }

@@ -20,7 +20,7 @@ model User {
   name      String 
   email     String @unique
   password  String
-  admin     Boolean @default(false)
+  admin     Boolean @default(true)
 }
 
 model Post {

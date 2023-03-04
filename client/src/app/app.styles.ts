@@ -1,7 +1,7 @@
 const btnbase = 'px-3 py-1 text-gray-200 disabled:opacity-30'
 
 export const Styles = {
-  window: 'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 w-screen min-h-screen',
+  window: 'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 w-screen min-h-screen pb-8',
 
   header: 'w-full bg-gray-800 p-4 flex justify-between place-items-center text-gray-200',
   headerh2: 'text-2xl font-semibold text-sky-400',
@@ -9,6 +9,7 @@ export const Styles = {
 
   centerbox: 'flex justify-center',
   rightbox: 'flex justify-end',
+  bottombox: 'content-end',
 
   linkbutton: `${btnbase} hover:bg-sky-500/50 rounded-md`,
   pributton: `${btnbase} bg-sky-600 hover:bg-sky-500 rounded-md`,
@@ -37,7 +38,7 @@ export const Styles = {
   formbuttons: 'flex justify-end space-x-4',
   inputspan: 'text-sm font-semibold text-amber-500',
 
-  postpage: 'max-w-2xl mx-auto space-y-4 my-4',
+  postpage: 'max-w-2xl mx-auto space-y-4 my-8',
   postbuttons: 'flex',
   postimagediv: 'overflow-hidden min-h-60 max-h-96 bg-gray-500/50',
   postimage: 'object-cover ',
