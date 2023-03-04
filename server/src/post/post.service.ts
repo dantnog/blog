@@ -87,7 +87,15 @@ export class PostService {
         text: dto.text,
         slug: this.createSlug(dto.title),
       };
-      if (image) toUpdate['image'] = image.filename;
+
+      const post = await this.prisma.post.findUnique({
+        where: { id: Number(id) },
+      });
+
+      if (image) {
+        toUpdate['image'] = image.filename;
+        this.deleteImage(post.image);
+      }
 
       const result = await this.prisma.post.update({
         where: { id: Number(id) },
@@ -100,7 +108,7 @@ export class PostService {
       );
       return result;
     } catch (err) {
-      console.log('[GET ALL POSTS] Error.\n', err);
+      console.log('[UPDATE POST] Error.\n', err);
       throw new InternalServerErrorException('Failed to get post');
     }
   }
