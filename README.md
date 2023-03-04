@@ -24,7 +24,13 @@ To the database use MySql or MariaDB. Set the .env variable `DATABASE_URL`. And 
 
 ```bash
 # server side
-npx prisma migrate:dev
+npx prisma migrate dev
+```
+
+```bash
+# .env example
+DATABASE_URL="mysql://<name>:<password>@localhost:3306/theblog"
+JWT_SECRET="secret"
 ```
 
 Run it
